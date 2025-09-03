@@ -3,6 +3,8 @@ local act = wezterm.action
 
 return {
   font = wezterm.font("JetBrains Mono", { weight = 'Bold', italic = false }),
+  enable_scroll_bar = true,
+  scrollback_lines = 5000,
   keys = {
     -- Tab navigation with CMD + Arrows
     {
