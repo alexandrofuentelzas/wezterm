@@ -2,6 +2,7 @@ local wezterm = require("wezterm")
 local act = wezterm.action
 
 return {
+  font = wezterm.font("JetBrains Mono", { weight = 'Bold', italic = false }),
   keys = {
     -- Tab navigation with CMD + Arrows
     {
