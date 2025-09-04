@@ -4,7 +4,10 @@ local act = wezterm.action
 return {
   font = wezterm.font("JetBrains Mono", { weight = 'Bold', italic = false }),
   enable_scroll_bar = true,
-  scrollback_lines = 5000,
+  scrollback_lines = 25000,
+  colors = {
+      cursor_bg = "#CCCCCC",
+  },
   keys = {
     -- Tab navigation with CMD + Arrows
     {
@@ -35,29 +38,10 @@ return {
       mods = "CMD|SHIFT",
       action = act.SplitHorizontal { domain = "CurrentPaneDomain" },
     },
-
-    -- TMUX session splitting and attaching
     {
-      key = "d",
-      mods = "CMD|CTRL",
-      action = wezterm.action_callback(function(pane)
-        local tmux_socket = wezterm.pane.get_environment_variables(pane)['TMUX']
-        return act.SplitVertical {
-          domain = "CurrentPaneDomain",
-          args = { "tmux", "attach", "-t", tmux_socket }
-        }
-      end),
-    },
-    {
-      key = "d",
-      mods = "CMD|CTRL|SHIFT",
-      action = wezterm.action_callback(function(pane)
-        local tmux_socket = wezterm.pane.get_environment_variables(pane)['TMUX']
-        return act.SplitHorizontal {
-          domain = "CurrentPaneDomain",
-          args = { "tmux", "attach", "-t", tmux_socket }
-        }
-      end),
+        key = "k",
+        mods = "CMD",
+        action = act.ClearScrollback "ScrollbackAndViewport",
     },
   },
 }
